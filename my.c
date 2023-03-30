@@ -79,6 +79,31 @@ int main(int argc, char *argv[])
             printf("1\n");
             break;
         case 2: // delete
+            if (head == NULL)
+            {
+                printf("No info to delete");
+            }
+            else
+            {
+                printf("name to delete: ");
+                scanf("%s", name);
+                struct contact_info *before_node = head;
+                current_node = before_node->next;
+                while (current_node->next != NULL)
+                {
+                    if (current_node->name == name)
+                    {
+                        before_node->next = current_node->next;
+                        free(current_node);
+                        break;
+                    }
+                    else
+                    {
+                        before_node = before_node->next;
+                        current_node = current_node->next;
+                    }
+                }
+            }
             printf("2\n");
             break;
         case 3: // update
