@@ -37,26 +37,44 @@ int main(int argc, char *argv[])
             printf("Choose correct one");
         }
 
+        struct contact_info *new_node;
+        new_node = (struct contact_info *)malloc(sizeof(struct contact_info));
+
+        struct contact_info *current_node;
+        current_node = head;
+
+        char name[100] = {0};
+        char phone_number[100] = {0};
+
         switch (menu)
         {
         case 1: // insert
             if (head == NULL)
             {
-                struct contact_info *current_node;
-                printf("head is null\n");
-                printf("First make head!\n");
 
-                char name[100] = {0};
-                char phone_number[100] = {0};
                 printf("name: ");
                 scanf("%s", name);
                 printf("phone_number: ");
                 scanf("%s", phone_number);
-                current_node = (struct contact_info *)malloc(sizeof(struct contact_info));
-                current_node->name = name;
-                current_node->phone_number = phone_number;
-                current_node->next = NULL;
-                head = current_node;
+                new_node->name = strdup(name);
+                new_node->phone_number = strdup(phone_number);
+                new_node->next = NULL;
+                head = new_node;
+            }
+            else
+            {
+                printf("name: ");
+                scanf("%s", name);
+                printf("phone_number: ");
+                scanf("%s", phone_number);
+                new_node->name = strdup(name);
+                new_node->phone_number = strdup(phone_number);
+                new_node->next = NULL;
+                while (current_node->next != NULL)
+                {
+                    current_node = current_node->next;
+                };
+                current_node->next = new_node;
             }
             printf("1\n");
             break;
